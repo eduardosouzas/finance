@@ -4,8 +4,8 @@
 // import { AuthenticationSpy, ValidationSpy, AddAccountSpy } from '@/tests/presentation/mocks'
 // import { throwError } from '@/tests/domain/mocks'
 
-describe('SignUp Controller', () => {
-  test('Should return 500 if AddAccount throws', async () => {
+describe('Broker Controller', () => {
+  test('Should return 500 if AddBroker throws', async () => {
     // const { sut, addAccountSpy } = makeSut()
     // jest.spyOn(addAccountSpy, 'add').mockImplementationOnce(throwError)
     // const httpResponse = await sut.handle(mockRequest())
