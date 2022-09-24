@@ -1,16 +1,41 @@
-// import { SignUpController } from '@/presentation/controllers'
-// import { MissingParamError, ServerError, EmailInUseError } from '@/presentation/errors'
-// import { ok, serverError, badRequest, forbidden } from '@/presentation/helpers'
-// import { AuthenticationSpy, ValidationSpy, AddAccountSpy } from '@/tests/presentation/mocks'
-// import { throwError } from '@/tests/domain/mocks'
+import { BrokerController } from '@/presentation/controllers'
+import { ServerError } from '@/presentation/errors'
+import { serverError } from '@/presentation/helpers'
+import { ValidationSpy, AddBrokerSpy } from '@/tests/presentation/mocks'
+import { throwError } from '@/tests/domain/mocks'
+
+import { faker } from '@faker-js/faker/locale/pt_BR'
+
+const mockRequest = (): BrokerController.Request => {
+  return {
+    name: faker.company.name(),
+    description: faker.company.bsAdjective()
+  }
+}
+
+type SutTypes = {
+  sut: BrokerController
+  addBrokerSpy: AddBrokerSpy
+  validationSpy: ValidationSpy
+}
+
+const makeSut = (): SutTypes => {
+  const addBrokerSpy = new AddBrokerSpy()
+  const validationSpy = new ValidationSpy()
+  const sut = new BrokerController(addBrokerSpy, validationSpy)
+  return {
+    sut,
+    addBrokerSpy,
+    validationSpy
+  }
+}
 
 describe('Broker Controller', () => {
   test('Should return 500 if AddBroker throws', async () => {
-    // const { sut, addAccountSpy } = makeSut()
-    // jest.spyOn(addAccountSpy, 'add').mockImplementationOnce(throwError)
-    // const httpResponse = await sut.handle(mockRequest())
-    // expect(httpResponse).toEqual(serverError(new ServerError(null)))
-    expect(1).toBe(1)
+    const { sut, addBrokerSpy } = makeSut()
+    jest.spyOn(addBrokerSpy, 'add').mockImplementationOnce(throwError)
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(serverError(new ServerError(null)))
   })
 
   // test('Should call AddAccount with correct values', async () => {
