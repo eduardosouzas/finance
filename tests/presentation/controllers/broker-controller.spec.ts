@@ -1,6 +1,6 @@
 import { BrokerController } from '@/presentation/controllers'
-import { ServerError } from '@/presentation/errors'
-import { serverError } from '@/presentation/helpers'
+import { MissingParamError, ServerError } from '@/presentation/errors'
+import { badRequest, serverError } from '@/presentation/helpers'
 import { ValidationSpy, AddBrokerSpy } from '@/tests/presentation/mocks'
 import { throwError } from '@/tests/domain/mocks'
 
@@ -47,6 +47,19 @@ describe('Broker Controller', () => {
       description: request.description
     })
   })
+  test('Should call Validation with correct value', async () => {
+    const { sut, validationSpy } = makeSut()
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(validationSpy.input).toEqual(request)
+  })
+
+  test('Should return 400 if Validation returns an error', async () => {
+    const { sut, validationSpy } = makeSut()
+    validationSpy.error = new MissingParamError(faker.random.word())
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(badRequest(validationSpy.error))
+  })
 
   // test('Should return 403 if AddAccount returns false', async () => {
   //   const { sut, addAccountSpy } = makeSut()
@@ -59,20 +72,6 @@ describe('Broker Controller', () => {
   //   const { sut, authenticationSpy } = makeSut()
   //   const httpResponse = await sut.handle(mockRequest())
   //   expect(httpResponse).toEqual(ok(authenticationSpy.result))
-  // })
-
-  // test('Should call Validation with correct value', async () => {
-  //   const { sut, validationSpy } = makeSut()
-  //   const request = mockRequest()
-  //   await sut.handle(request)
-  //   expect(validationSpy.input).toEqual(request)
-  // })
-
-  // test('Should return 400 if Validation returns an error', async () => {
-  //   const { sut, validationSpy } = makeSut()
-  //   validationSpy.error = new MissingParamError(faker.random.word())
-  //   const httpResponse = await sut.handle(mockRequest())
-  //   expect(httpResponse).toEqual(badRequest(validationSpy.error))
   // })
 
   // test('Should call Authentication with correct values', async () => {
