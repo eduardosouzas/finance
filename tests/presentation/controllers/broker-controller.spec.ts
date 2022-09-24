@@ -38,16 +38,15 @@ describe('Broker Controller', () => {
     expect(httpResponse).toEqual(serverError(new ServerError(null)))
   })
 
-  // test('Should call AddAccount with correct values', async () => {
-  //   const { sut, addAccountSpy } = makeSut()
-  //   const request = mockRequest()
-  //   await sut.handle(request)
-  //   expect(addAccountSpy.params).toEqual({
-  //     name: request.name,
-  //     email: request.email,
-  //     password: request.password
-  //   })
-  // })
+  test('Should call AddBroker with correct values', async () => {
+    const { sut, addBrokerSpy } = makeSut()
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(addBrokerSpy.params).toEqual({
+      name: request.name,
+      description: request.description
+    })
+  })
 
   // test('Should return 403 if AddAccount returns false', async () => {
   //   const { sut, addAccountSpy } = makeSut()
