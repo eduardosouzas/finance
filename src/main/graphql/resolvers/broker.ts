@@ -1,8 +1,8 @@
 import { adaptResolver } from '@/main/adapters'
-import { makeLoadBrokerController } from '@/main/factories'
+import { makeBrokerController } from '@/main/factories'
 
 export default {
-  Query: {
-    surveys: async (parent: any, args: any, context: any) => adaptResolver(makeLoadBrokerController(), args, context)
+  Mutation: {
+    broker: async (parent: any, args: any, context: any) => adaptResolver(makeBrokerController(), args, context)
   }
 }
