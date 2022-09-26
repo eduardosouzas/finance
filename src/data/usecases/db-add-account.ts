@@ -1,6 +1,5 @@
 import { AddAccount } from '@/domain/usecases'
 import { Hasher, AddAccountRepository, CheckAccountByEmailRepository } from '@/data/protocols'
-
 export class DbAddAccount implements AddAccount {
   constructor (
     private readonly hasher: Hasher,

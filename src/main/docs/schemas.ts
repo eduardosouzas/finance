@@ -1,11 +1,17 @@
 import {
   brokerSchema,
   errorSchema,
-  brokerParamsSchema
+  brokerParamsSchema,
+  accountSchema,
+  loginParamsSchema,
+  signUpParamsSchema
 } from './schemas/'
 
 export default {
   broker: brokerSchema,
+  account: accountSchema,
+  loginParams: loginParamsSchema,
+  signUpParams: signUpParamsSchema,
   error: errorSchema,
   brokerParams: brokerParamsSchema
 }

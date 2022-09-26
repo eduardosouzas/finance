@@ -3,7 +3,6 @@ import { MissingParamError, ServerError, EmailInUseError } from '@/presentation/
 import { ok, serverError, badRequest, forbidden } from '@/presentation/helpers'
 import { AuthenticationSpy, ValidationSpy, AddAccountSpy } from '@/tests/presentation/mocks'
 import { throwError } from '@/tests/domain/mocks'
-
 import { faker } from '@faker-js/faker/locale/pt_BR'
 
 const mockRequest = (): SignUpController.Request => {

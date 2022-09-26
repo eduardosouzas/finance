@@ -1,4 +1,5 @@
 import { MongoClient, Collection } from 'mongodb'
+import { v4 as uuidv4 } from 'uuid'
 
 export const MongoHelper = {
   client: null as MongoClient,
@@ -18,9 +19,16 @@ export const MongoHelper = {
     return this.client.db().collection(name)
   },
 
+  async insertOne (name: string, data: object): Promise<string> {
+    const id = uuidv4()
+    const result = await this.client.db().collection(name).insertOne({ id, ...data })
+    return !result.insertedId ? null : id
+  },
+
   map: (data: any): any => {
-    const { _id, ...rest } = data
-    return { ...rest, id: _id.toHexString() }
+    return data
+    // const { _id, ...rest } = data
+    // return { ...rest, id: _id.toHexString() }
   },
 
   mapCollection: (collection: any[]): any[] => {

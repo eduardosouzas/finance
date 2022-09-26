@@ -1,6 +1,6 @@
-import { AddBroker } from '@/domain/usecases'
+import { AddBroker, LoadBroker } from '@/domain/usecases'
 
-// import facker from '@faker-js/faker'
+import { faker } from '@faker-js/faker/locale/pt_BR'
 
 export class AddBrokerSpy implements AddBroker {
   params: AddBroker.Params
@@ -9,5 +9,13 @@ export class AddBrokerSpy implements AddBroker {
   async add (params: AddBroker.Params): Promise<AddBroker.Result> {
     this.params = params
     return this.result
+  }
+}
+
+export class LoadBrokersSpy implements LoadBroker {
+  id: string
+  async load (id: string): Promise<LoadBroker.Result> {
+    this.id = id
+    return { id: faker.datatype.uuid() }
   }
 }

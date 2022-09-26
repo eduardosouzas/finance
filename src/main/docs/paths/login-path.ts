@@ -1,17 +1,14 @@
-export const brokerPath: any = {
+export const loginPath = {
   post: {
-    security: [{
-      apiKeyAuth: []
-    }],
-    tags: ['Broker'],
-    summary: 'API para criar uma Corretora',
+    tags: ['Login'],
+    summary: 'API para autenticar usuário',
     description: 'Essa rota pode ser executada por **qualquer usuário**',
     requestBody: {
       required: true,
       content: {
         'application/json': {
           schema: {
-            $ref: '#/schemas/brokerParams'
+            $ref: '#/schemas/loginParams'
           }
         }
       }
@@ -22,7 +19,7 @@ export const brokerPath: any = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/schemas/broker'
+              $ref: '#/schemas/account'
             }
           }
         }
@@ -30,8 +27,8 @@ export const brokerPath: any = {
       400: {
         $ref: '#/components/badRequest'
       },
-      403: {
-        $ref: '#/components/forbidden'
+      401: {
+        $ref: '#/components/unauthorized'
       },
       404: {
         $ref: '#/components/notFound'

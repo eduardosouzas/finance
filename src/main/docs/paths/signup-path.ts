@@ -1,17 +1,14 @@
-export const brokerPath: any = {
+export const signUpPath = {
   post: {
-    security: [{
-      apiKeyAuth: []
-    }],
-    tags: ['Broker'],
-    summary: 'API para criar uma Corretora',
+    tags: ['Login'],
+    summary: 'API para criar conta de um usuário',
     description: 'Essa rota pode ser executada por **qualquer usuário**',
     requestBody: {
       required: true,
       content: {
         'application/json': {
           schema: {
-            $ref: '#/schemas/brokerParams'
+            $ref: '#/schemas/signUpParams'
           }
         }
       }
@@ -22,7 +19,7 @@ export const brokerPath: any = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/schemas/broker'
+              $ref: '#/schemas/account'
             }
           }
         }

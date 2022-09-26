@@ -25,7 +25,8 @@ export default {
   tags: [{
     name: 'Login',
     description: 'APIs relacionadas a Login'
-  }, {
+  },
+  {
     name: 'Broker',
     description: 'APIs relacionadas ao gerenciamento de corretoras de valores'
   }],

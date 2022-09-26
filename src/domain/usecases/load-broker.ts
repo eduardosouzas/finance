@@ -1,5 +1,5 @@
 export interface LoadBroker {
-  load: (role?: string) => Promise<LoadBroker.Result>
+  load: (id: string) => Promise<LoadBroker.Result>
 }
 
 export namespace LoadBroker {

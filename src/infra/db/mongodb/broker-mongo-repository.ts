@@ -3,9 +3,8 @@ import { AddBrokerRepository, LoadBrokerRepository } from '@/data/protocols/db'
 
 export class BrokerMongoRepository implements AddBrokerRepository {
   async add (data: AddBrokerRepository.Params): Promise<AddBrokerRepository.Result> {
-    const accountCollection = MongoHelper.getCollection('brokers')
-    const result = await accountCollection.insertOne(data)
-    return result.insertedId !== null
+    const result = await MongoHelper.insertOne('brokers', data)
+    return result !== null
   }
 
   async load (id: string): Promise<LoadBrokerRepository.Result> {
@@ -14,7 +13,7 @@ export class BrokerMongoRepository implements AddBrokerRepository {
       id
     }, {
       projection: {
-        _id: 1,
+        id: 1,
         name: 1,
         description: 1
       }
