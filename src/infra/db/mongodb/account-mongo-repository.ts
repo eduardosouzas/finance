@@ -35,14 +35,13 @@ export class AccountMongoRepository implements AddAccountRepository, LoadAccount
 
   async updateAccessToken (id: string, token: string): Promise<void> {
     const accountCollection = MongoHelper.getCollection('accounts')
-    const result = await accountCollection.updateOne({
+    await accountCollection.updateOne({
       id
     }, {
       $set: {
         accessToken: token
       }
     })
-    console.log(result)
   }
 
   async loadByToken (token: string, role?: string): Promise<LoadAccountByTokenRepository.Result> {
