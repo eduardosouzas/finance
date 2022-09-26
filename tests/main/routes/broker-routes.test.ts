@@ -16,14 +16,13 @@ const mockAccessToken = async (): Promise<string> => {
   })
   const id = res
   const accessToken = sign({ id }, env.jwtSecret)
-  const result = await accountCollection.updateOne({
+  await accountCollection.updateOne({
     id: res
   }, {
     $set: {
       accessToken
     }
   })
-  console.log(result)
   return accessToken
 }
 
