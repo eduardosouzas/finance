@@ -1,4 +1,4 @@
-import { AddBroker, LoadBroker } from '@/domain/usecases'
+import { AddBroker, LoadBroker, AllBroker } from '@/domain/usecases'
 
 import { faker } from '@faker-js/faker/locale/pt_BR'
 
@@ -17,5 +17,20 @@ export class LoadBrokersSpy implements LoadBroker {
   async load (id: string): Promise<LoadBroker.Result> {
     this.id = id
     return { id: faker.datatype.uuid() }
+  }
+}
+
+export class AllBrokersSpy implements AllBroker {
+  brokers: AllBroker.Result[] = []
+
+  async all (): Promise<AllBroker.Result[]> {
+    for (let i = 0; i < 10; i++) {
+      this.brokers.push({
+        id: faker.datatype.uuid(),
+        name: faker.company.name(),
+        description: faker.company.bsAdjective()
+      })
+    }
+    return this.brokers
   }
 }
