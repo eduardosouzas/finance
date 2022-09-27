@@ -1,5 +1,5 @@
 import { MongoHelper } from '@/infra/db'
-import { AddBrokerRepository, LoadBrokerRepository } from '@/data/protocols/db'
+import { AddBrokerRepository, LoadBrokerRepository, AllBrokerRepository } from '@/data/protocols/db'
 
 export class BrokerMongoRepository implements AddBrokerRepository {
   async add (data: AddBrokerRepository.Params): Promise<AddBrokerRepository.Result> {
@@ -19,5 +19,11 @@ export class BrokerMongoRepository implements AddBrokerRepository {
       }
     })
     return broker && MongoHelper.map(broker)
+  }
+
+  async all (): Promise<AllBrokerRepository.Result[]> {
+    const brokerCollection = MongoHelper.getCollection('brokers')
+    const brokers = await brokerCollection.find().toArray()
+    return brokers && MongoHelper.map(brokers)
   }
 }
