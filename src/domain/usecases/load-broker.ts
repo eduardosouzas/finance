@@ -3,6 +3,9 @@ export interface LoadBroker {
 }
 
 export namespace LoadBroker {
+  export type Params = {
+    id: string
+  }
   export type Result = {
     id: string
   }
