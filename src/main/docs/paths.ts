@@ -7,5 +7,5 @@ import {
 export default {
   '/login': loginPath,
   '/signup': signUpPath,
-  '/broker': brokerPath
+  '/brokers': brokerPath
 }

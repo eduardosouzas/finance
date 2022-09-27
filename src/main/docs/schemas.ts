@@ -1,5 +1,6 @@
 import {
   brokerSchema,
+  brokersSchema,
   errorSchema,
   brokerParamsSchema,
   accountSchema,
@@ -9,6 +10,7 @@ import {
 
 export default {
   broker: brokerSchema,
+  brokers: brokersSchema,
   account: accountSchema,
   loginParams: loginParamsSchema,
   signUpParams: signUpParamsSchema,
