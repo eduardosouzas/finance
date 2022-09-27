@@ -1,39 +1,32 @@
-import { DbLoadBroker } from '@/data/usecases'
-import { mockLoadBrokerParams, throwError } from '@/tests/domain/mocks'
-import { LoadBrokerRepositorySpy } from '@/tests/data/mocks'
+import { DbAllBroker } from '@/data/usecases'
+import { throwError } from '@/tests/domain/mocks'
+import { AllBrokerRepositorySpy } from '@/tests/data/mocks'
 
 type SutTypes = {
-  sut: DbLoadBroker
-  loadBrokerRepositorySpy: LoadBrokerRepositorySpy
+  sut: DbAllBroker
+  allBrokerRepositorySpy: AllBrokerRepositorySpy
 }
 
 const makeSut = (): SutTypes => {
-  const loadBrokerRepositorySpy = new LoadBrokerRepositorySpy()
-  const sut = new DbLoadBroker(loadBrokerRepositorySpy)
+  const allBrokerRepositorySpy = new AllBrokerRepositorySpy()
+  const sut = new DbAllBroker(allBrokerRepositorySpy)
   return {
     sut,
-    loadBrokerRepositorySpy
+    allBrokerRepositorySpy
   }
 }
 
-describe('DbLoadBroker Usecase', () => {
-  test('Should call LoadBrokerRepository with correct values', async () => {
-    const { sut } = makeSut()
-    const loadBrokerParams = mockLoadBrokerParams()
-    const result = await sut.load(loadBrokerParams.id)
-    expect(result).toBeTruthy()
+describe('DbAllBroker Usecase', () => {
+  test('Should call AllBrokerRepository with correct values', async () => {
+    const { sut, allBrokerRepositorySpy } = makeSut()
+    const result = await sut.all()
+    expect(result).toEqual(allBrokerRepositorySpy.brokers)
   })
 
-  test('Should throw if loadBrokerRepository throws', async () => {
-    const { sut, loadBrokerRepositorySpy } = makeSut()
-    jest.spyOn(loadBrokerRepositorySpy, 'load').mockImplementationOnce(throwError)
-    const promise = sut.load(mockLoadBrokerParams().id)
+  test('Should throw if AllBrokerRepository throws', async () => {
+    const { sut, allBrokerRepositorySpy } = makeSut()
+    jest.spyOn(allBrokerRepositorySpy, 'all').mockImplementationOnce(throwError)
+    const promise = sut.all()
     await expect(promise).rejects.toThrow()
-  })
-
-  test('Should return true on success', async () => {
-    const { sut } = makeSut()
-    const isValid = await sut.load(mockLoadBrokerParams().id)
-    expect(isValid).toBeTruthy()
   })
 })

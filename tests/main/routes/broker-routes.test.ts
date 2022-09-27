@@ -73,4 +73,26 @@ describe('Brokers Routes', () => {
         .expect(200)
     })
   })
+
+  describe('GET /brokers', () => {
+    describe('GET /brokers/', () => {
+      test('Should return 403 on all broker result without accessToken', async () => {
+        await request(app)
+          .get('/api/brokers')
+          .expect(403)
+      })
+
+      test('Should return 200 on all broker result with accessToken', async () => {
+        const accessToken = await mockAccessToken()
+        await MongoHelper.insertOne('brokers', {
+          name: 'XP Investimentos',
+          description: 'Maior corretora de valores do Brasil'
+        })
+        await request(app)
+          .get('/api/brokers')
+          .set('x-access-token', accessToken)
+          .expect(200)
+      })
+    })
+  })
 })

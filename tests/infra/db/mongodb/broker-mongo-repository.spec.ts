@@ -33,7 +33,7 @@ describe('BrokerMongoRepository', () => {
     })
   })
 
-  describe('findById()', () => {
+  describe('find()', () => {
     let name = faker.company.name()
     let description = faker.company.bsAdjective()
 
@@ -61,6 +61,18 @@ describe('BrokerMongoRepository', () => {
       })
       const broker = await sut.load(faker.datatype.uuid())
       expect(broker).toBeFalsy()
+    })
+
+    test('Should return all brokers', async () => {
+      const sut = makeSut()
+      for (let i = 0; i < 10; i++) {
+        await MongoHelper.insertOne('brokers', {
+          name: faker.company.name(),
+          description: faker.company.bsAdjective
+        })
+      }
+      const broker = await sut.all()
+      expect(broker).toBeTruthy()
     })
   })
 })

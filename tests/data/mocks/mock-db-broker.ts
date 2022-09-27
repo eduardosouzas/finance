@@ -1,4 +1,4 @@
-import { AddBrokerRepository, LoadBrokerRepository } from '@/data/protocols'
+import { AddBrokerRepository, LoadBrokerRepository, AllBrokerRepository } from '@/data/protocols'
 
 import { faker } from '@faker-js/faker/locale/pt_BR'
 
@@ -21,5 +21,20 @@ export class LoadBrokerRepositorySpy implements LoadBrokerRepository {
 
   async load (id: string): Promise<LoadBrokerRepository.Result> {
     return this.result
+  }
+}
+
+export class AllBrokerRepositorySpy implements AllBrokerRepository {
+  brokers: AllBrokerRepository.Result[] = []
+
+  async all (): Promise<AllBrokerRepository.Result[]> {
+    for (let i = 0; i < 10; i++) {
+      this.brokers.push({
+        id: faker.datatype.uuid(),
+        name: faker.company.name(),
+        description: faker.company.bsAdjective()
+      })
+    }
+    return this.brokers
   }
 }
