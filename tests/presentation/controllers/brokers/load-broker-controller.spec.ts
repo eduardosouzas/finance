@@ -1,6 +1,6 @@
 
 import { faker } from '@faker-js/faker/locale/pt_BR'
-import { LoadBrokersSpy } from '../mocks'
+import { LoadBrokersSpy } from '../../mocks'
 import { LoadBrokerController } from '@/presentation/controllers'
 
 const mockRequest = (): LoadBrokerController.Request => ({ id: faker.datatype.uuid() })

@@ -1,7 +1,7 @@
 import { AllBroker } from '@/domain/usecases'
-import { AccessDeniedError } from '../errors'
-import { forbidden, serverError, ok } from '../helpers'
-import { Controller, HttpResponse } from '../protocols'
+import { AccessDeniedError } from '@/presentation/errors'
+import { forbidden, serverError, ok } from '@/presentation/helpers'
+import { Controller, HttpResponse } from '@/presentation/protocols'
 
 export class AllBrokerController implements Controller {
   constructor (

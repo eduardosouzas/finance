@@ -1,7 +1,7 @@
 import { LoadBroker } from '@/domain/usecases'
-import { InvalidParamError } from '../errors'
-import { forbidden, ok, serverError } from '../helpers'
-import { Controller, HttpResponse } from '../protocols'
+import { InvalidParamError } from '@/presentation/errors'
+import { forbidden, ok, serverError } from '@/presentation/helpers'
+import { Controller, HttpResponse } from '@/presentation/protocols'
 
 export class LoadBrokerController implements Controller {
   constructor (
@@ -11,7 +11,6 @@ export class LoadBrokerController implements Controller {
   async handle (request: LoadBrokerController.Request): Promise<HttpResponse> {
     try {
       const { id } = request
-      console.log(request)
       if (!id) {
         return forbidden(new InvalidParamError('id'))
       }

@@ -1,7 +1,7 @@
 import { AddBroker } from '@/domain/usecases'
-import { NameInUseError } from '../errors'
-import { badRequest, forbidden, serverError, ok } from '../helpers'
-import { Controller, HttpResponse, Validation } from '../protocols'
+import { NameInUseError } from '@/presentation/errors'
+import { badRequest, forbidden, serverError, ok } from '@/presentation/helpers'
+import { Controller, HttpResponse, Validation } from '@/presentation/protocols'
 
 export class BrokerController implements Controller {
   constructor (
