@@ -1,5 +1,5 @@
 import base from './base'
 import login from './login'
-import broker from './broker'
+import brokers from './brokers'
 
-export default [base, broker, login]
+export default [base, brokers, login]

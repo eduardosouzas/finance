@@ -5,7 +5,7 @@ import { UserInputError, AuthenticationError, ForbiddenError, ApolloError } from
 export const adaptResolver = async (controller: Controller, args?: any, context?: any): Promise<any> => {
   const request = {
     ...(args || {}),
-    accountId: context?.req?.accountId
+    accountId: context?.req?.id
   }
   const httpResponse = await controller.handle(request)
   switch (httpResponse.statusCode) {
